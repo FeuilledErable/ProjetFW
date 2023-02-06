@@ -3,35 +3,29 @@
 {% block title %}Atelier index{% endblock %}
 
 {% block body %}
-    <h1>Atelier index</h1>
+    <h1>Bienvenu.e ! </h1>
+    <br>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>Description</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for atelier in ateliers %}
-            <tr>
-                <td>{{ atelier.id }}</td>
-                <td>{{ atelier.nom }}</td>
-                <td>{{ atelier.description }}</td>
-                <td>
-                    <a href="{{ path('app_atelier_show', {'id': atelier.id}) }}">show</a>
-                    <a href="{{ path('app_atelier_edit', {'id': atelier.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <fieldset class="border border-secondary">
+        <p>Bienvenu.e sur notre site ! </p>
+        <p>Ici vous pouvez créer un nouvel atelier, le modifier, et voir la liste au complet de nos ateliers proposés !</p>
+    </fieldset>
 
-    <a href="{{ path('app_atelier_new') }}">Create new</a>
+    <br>
+    <br>
+    <h5><u> Programmeurs de talent qui méritent une magnifique note ✨ : </u></h5>
+    <ul class="border border-secondary">
+        <li>
+        KOUKOUGNON Lehion Alexia
+        </li>
+        <li>
+        MBANGANA ENGONGOLO Rebeca
+        </li>
+        <li>
+        PROUST Olivia
+        </li>
+        <li>
+        TERTEREAU Rhayan
+        </li>
+    </ul>
 {% endblock %}

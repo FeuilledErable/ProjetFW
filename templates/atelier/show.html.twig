@@ -3,8 +3,8 @@
 {% block title %}Atelier{% endblock %}
 
 {% block body %}
-    <h1>Atelier</h1>
-
+    <h1 class="text-uppercase nav justify-content-center"><u>Atelier {{ atelier.nom }} </u></h1>
+    <br>
     <table class="table">
         <tbody>
             <tr>
@@ -22,9 +22,11 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_atelier_index') }}">back to list</a>
+    <a href="{{ path('app_atelier_list') }}">back to list</a>
 
     <a href="{{ path('app_atelier_edit', {'id': atelier.id}) }}">edit</a>
 
-    {{ include('atelier/_delete_form.html.twig') }}
+    <br>
+
+    {{ include('layers/_delete_form.html.twig') }}
 {% endblock %}

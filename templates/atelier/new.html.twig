@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Atelier{% endblock %}
+{% block title %}Nouvel Atelier{% endblock %}
 
 {% block body %}
-    <h1>Create new Atelier</h1>
-
-    {{ include('atelier/_form.html.twig') }}
+    <h1 class="text-uppercase">Créer un nouvel Atelier</h1>
+    <br>
+    {{ include('layers/_form.html.twig') }}
 
     <a href="{{ path('app_atelier_index') }}">back to list</a>
 {% endblock %}

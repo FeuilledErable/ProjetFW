@@ -14,9 +14,15 @@ use Symfony\Component\Routing\Annotation\Route;
 class AtelierController extends AbstractController
 {
     #[Route('/', name: 'app_atelier_index', methods: ['GET'])]
-    public function index(AtelierRepository $atelierRepository): Response
+    public function index(): Response
     {
-        return $this->render('atelier/index.html.twig', [
+        return $this->render('atelier/index.html.twig');
+    }
+
+    #[Route('/liste', name: 'app_atelier_list', methods: ['GET'])]
+    public function list(AtelierRepository $atelierRepository): Response
+    {
+        return $this->render('atelier/list.html.twig', [
             'ateliers' => $atelierRepository->findAll(),
         ]);
     }
