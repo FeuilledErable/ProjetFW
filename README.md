@@ -59,7 +59,7 @@ symfony console make:crud Atelier
 
 ## Création de la barre de navigation à l'aide de Bootstrap. 
    ```
-   Ajout de design afin d\'embellir l\'application. 
+   Ajout de design afin d'embellir l'application. 
    ```
 
 # Question 6
@@ -86,4 +86,11 @@ symfony console make:registration-form
 ## Relation User Atelier
 ```bash
 symfony console make:entity Atelier
+```
+
+# Question 9
+
+## Restriction creation d'un atelier
+```
+Creation d'atelier uniquement possible par un instructeur connecté
 ```

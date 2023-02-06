@@ -38,6 +38,7 @@ class AtelierController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $atelier->setInstructeur($this->getUser());
             $atelierRepository->save($atelier, true);
 
             return $this->redirectToRoute('app_atelier_index', [], Response::HTTP_SEE_OTHER);
