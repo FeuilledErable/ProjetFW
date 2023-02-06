@@ -19,6 +19,9 @@ class Atelier
     #[ORM\Column(length: 255)]
     private ?string $description = null;
 
+    #[ORM\ManyToOne(inversedBy: 'ateliers')]
+    private ?User $instructeur = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -44,6 +47,18 @@ class Atelier
     public function setDescription(string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getInstructeur(): ?User
+    {
+        return $this->instructeur;
+    }
+
+    public function setInstructeur(?User $instructeur): self
+    {
+        $this->instructeur = $instructeur;
 
         return $this;
     }

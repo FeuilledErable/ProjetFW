@@ -33,6 +33,7 @@ class AtelierFixtures extends Fixture
         $faker = \Faker\Factory::create("fr_FR");
 
         for ($i = 0; $i < 5; $i++) {
+
             $user = new User();
             $user
                 ->setNom($faker->lastName)
@@ -40,14 +41,13 @@ class AtelierFixtures extends Fixture
                 ->setPassword($this->passwordHasher->hashPassword($user,'motdepasse'))
                 ->setUsername("user".$i);
             $manager->persist($user);
-        }
 
 
-        for ($i = 0; $i < 5; $i++) {
             $atelier = new Atelier();
             $atelier
                 ->setNom($faker->word)
-                ->setDescription(join("\n\n* ", $faker->paragraphs));
+                ->setDescription(join("\n\n* ", $faker->paragraphs))
+                ->setInstructeur($user);
             $manager->persist($atelier);
         }
         $manager->flush();

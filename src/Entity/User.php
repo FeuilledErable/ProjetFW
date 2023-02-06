@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -34,6 +36,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $prenom = null;
+
+    #[ORM\OneToMany(mappedBy: 'instructeur', targetEntity: Atelier::class)]
+    private Collection $ateliers;
+
+    public function __construct()
+    {
+        $this->ateliers = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -127,6 +137,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPrenom(?string $prenom): self
     {
         $this->prenom = $prenom;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Atelier>
+     */
+    public function getAteliers(): Collection
+    {
+        return $this->ateliers;
+    }
+
+    public function addAtelier(Atelier $atelier): self
+    {
+        if (!$this->ateliers->contains($atelier)) {
+            $this->ateliers->add($atelier);
+            $atelier->setInstructeur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAtelier(Atelier $atelier): self
+    {
+        if ($this->ateliers->removeElement($atelier)) {
+            // set the owning side to null (unless already changed)
+            if ($atelier->getInstructeur() === $this) {
+                $atelier->setInstructeur(null);
+            }
+        }
 
         return $this;
     }

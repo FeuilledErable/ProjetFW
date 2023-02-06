@@ -4,6 +4,9 @@
         <p class="card-text">
             {{ atelier.description | raw }}
         </p>
+
+        <h4 class="card-title">Instructeur : {{ atelier.instructeur.nom }} {{atelier.instructeur.prenom }}</h4>
+
         <div class="card-footer bg-transparent border-success">
 
             <button onclick="location.href='{{ path('app_atelier_edit', {'id': atelier.id}) }}'"
