@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Atelier;
 use App\Form\AtelierType;
+use App\MesServices\MarkdownAtelier;
 use App\Repository\AtelierRepository;
+use cebe\markdown\Markdown;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,10 +22,11 @@ class AtelierController extends AbstractController
     }
 
     #[Route('/liste', name: 'app_atelier_list', methods: ['GET'])]
-    public function list(AtelierRepository $atelierRepository): Response
+    public function list(AtelierRepository $atelierRepository, MarkdownAtelier $markdownAtelier): Response
     {
+        $ateliers =  $markdownAtelier->parseArray($atelierRepository->findAll());
         return $this->render('atelier/list.html.twig', [
-            'ateliers' => $atelierRepository->findAll(),
+            'ateliers' => $ateliers,
         ]);
     }
 
@@ -47,10 +50,10 @@ class AtelierController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_atelier_show', methods: ['GET'])]
-    public function show(Atelier $atelier): Response
+    public function show(Atelier $atelier, MarkdownAtelier $markdownAtelier): Response
     {
         return $this->render('atelier/show.html.twig', [
-            'atelier' => $atelier,
+            'atelier' => $markdownAtelier->parse($atelier),
         ]);
     }
 

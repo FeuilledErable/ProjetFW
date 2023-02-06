@@ -3,7 +3,7 @@
         <h5 class="card-title">{{ atelier.nom }}</h5>
 
         <span class="d-inline-block text-truncate" style="max-width: 150px;">
-                    {{ atelier.description }}
+                    {{ atelier.description | raw }}
         </span>
         <br>
         <button onclick="location.href='{{ path('app_atelier_show', {'id': atelier.id}) }}'"

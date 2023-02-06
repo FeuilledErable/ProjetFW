@@ -14,8 +14,9 @@ class AtelierFixtures extends Fixture
         $faker = \Faker\Factory::create("fr_FR");
         for ($i = 0; $i < 5; $i++) {
             $atelier = new Atelier();
-            $atelier->setNom($faker->word);
-            $atelier->setDescription($faker->sentence);
+            $atelier
+                ->setNom($faker->word)
+                ->setDescription(join("\n\n* ", $faker->paragraphs));
             $manager->persist($atelier);
         }
         $manager->flush();
