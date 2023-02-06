@@ -47,3 +47,10 @@ symfony composer require orm-fixtures --dev
 symfony console make:fixture
 symfony console doctrine:fixtures:load
 ```
+
+# Question 4
+
+## Créer un CRUD pour gérer les ateliers
+```bash
+symfony console make:crud Atelier
+```
