@@ -33,3 +33,17 @@ symfony console make:entity Atelier
 symfony console make:migration
 symfony console doctrine:migrations:migrate
 ```
+
+# Question 3
+
+## Installer Faker
+```bash
+symfony composer require fakerphp/faker
+```
+
+## Créer sa fixture et l'executer
+```bash
+symfony composer require orm-fixtures --dev
+symfony console make:fixture
+symfony console doctrine:fixtures:load
+```
