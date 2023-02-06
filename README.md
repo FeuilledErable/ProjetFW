@@ -69,3 +69,16 @@ symfony console make:crud Atelier
 ```bash
 symfony composer require cebe/markdown
 ```
+
+# Question 7
+
+## User et authentification
+
+```bash
+symfony console make:user
+symfony console make:migration
+symfony console doctrine:migrations:migrate
+symfony console make:entity User
+symfony console make:auth
+symfony console make:registration-form
+```
