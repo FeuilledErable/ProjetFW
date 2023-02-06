@@ -58,3 +58,6 @@ symfony console make:crud Atelier
 # Question 5 
 
 ## Création de la barre de navigation à l'aide de Bootstrap. 
+   ```bash
+    Ajout de design afin d\'embellir l\'application.
+    ```
