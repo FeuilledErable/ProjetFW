@@ -9,9 +9,12 @@
 
         <div class="card-footer bg-transparent border-success">
 
-            <button onclick="location.href='{{ path('app_atelier_edit', {'id': atelier.id}) }}'"
+
+            {% if is_granted('ROLE_INSTRUCTEUR') %}
+                <button onclick="location.href='{{ path('app_atelier_edit', {'id': atelier.id}) }}'"
                     title="Edit" class="btn btn-success">edit</button>
-            {{ include('layers/_delete_form.html.twig') }}
+                {{ include('layers/_delete_form.html.twig') }}
+            {% endif %}
 
         </div>
     </div>

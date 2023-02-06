@@ -94,3 +94,10 @@ symfony console make:entity Atelier
 ```
 Creation d'atelier uniquement possible par un instructeur connecté
 ```
+
+# Question 10
+
+## Contraintes pertinentes
+```
+Button edit et delete accessible que par un instructeur
+```
