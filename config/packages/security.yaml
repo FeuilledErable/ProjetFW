@@ -19,6 +19,7 @@ security:
             custom_authenticator: App\Security\AppUserAuthenticator
             logout:
                 path: app_logout
+                target: app_atelier_index
                 # where to redirect after logout
                 # target: app_any_route
 
