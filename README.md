@@ -107,4 +107,5 @@ Button edit et delete accessible que par un instructeur
 ## Embellissement
 ```
 Mise en forme des formulaires, edit, ..
+Barre de navigation mise à jour.
 ```
