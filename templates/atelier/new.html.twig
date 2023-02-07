@@ -5,7 +5,12 @@
 {% block body %}
     <h1 class="text-uppercase">Créer un nouvel Atelier</h1>
     <br>
-    {{ include('layers/_form.html.twig') }}
 
-    <a href="{{ path('app_atelier_index') }}">back to list</a>
+
+    <div class="card w-75 p-3 mx-auto border border-secondary bg-light">
+        <div class="card-body bg-light" >
+            {{ include('layers/_form.html.twig') }}
+            <a href="{{ path('app_atelier_index') }}">back to list</a>
+        </div>
+    </div>
 {% endblock %}

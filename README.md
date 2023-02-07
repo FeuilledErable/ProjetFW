@@ -101,3 +101,10 @@ Creation d'atelier uniquement possible par un instructeur connecté
 ```
 Button edit et delete accessible que par un instructeur
 ```
+
+# Question 11
+
+## Embellissement
+```
+Mise en forme des formulaires, edit, ..
+```
