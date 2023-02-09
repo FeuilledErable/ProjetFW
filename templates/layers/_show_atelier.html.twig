@@ -9,6 +9,31 @@
 
         <div class="card-footer bg-transparent border-success">
             {% if is_granted('ROLE_INSTRUCTEUR') %}
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nom d'utilisateur</th>
+                            <th scope="col">Prénom</th>
+                            <th scope="col">Nom</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% if atelier.apprentis is empty %}
+                        <tr>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                    {% endif %}
+                    {% for user in atelier.apprentis %}
+                        <tr>
+                            <td>{{ user.username }}</td>
+                            <td>{{ user.prenom }}</td>
+                            <td>{{ user.nom }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
                 <button onclick="location.href='{{ path('app_atelier_edit', {'id': atelier.id}) }}'"
                         title="Edit" class="btn btn-success">edit</button>
                 {{ include('layers/_delete_form.html.twig') }}
