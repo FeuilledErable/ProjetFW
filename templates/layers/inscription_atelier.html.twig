@@ -1,0 +1,4 @@
+{% if not (app.user in atelier.apprentis) %}
+    <button onclick="location.href='{{ path('app_atelier_inscription', {'id': atelier.id}) }}'"
+            title="Inscription" class="btn btn-warning">Inscription à l'atelier</button>
+{% endif %}

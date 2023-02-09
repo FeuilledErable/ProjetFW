@@ -8,12 +8,15 @@
         <h4 class="card-title">Instructeur : {{ atelier.instructeur.nom }} {{atelier.instructeur.prenom }}</h4>
 
         <div class="card-footer bg-transparent border-success">
-
-
             {% if is_granted('ROLE_INSTRUCTEUR') %}
                 <button onclick="location.href='{{ path('app_atelier_edit', {'id': atelier.id}) }}'"
-                    title="Edit" class="btn btn-success">edit</button>
+                        title="Edit" class="btn btn-success">edit</button>
                 {{ include('layers/_delete_form.html.twig') }}
+            {% endif %}
+
+            {% if is_granted('ROLE_APPRENTI')  %}
+                {{ include('layers/inscription_atelier.html.twig') }}
+                {{ include('layers/desinscription_atelier.html.twig') }}
             {% endif %}
 
         </div>

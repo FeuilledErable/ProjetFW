@@ -83,6 +83,23 @@ class AtelierController extends AbstractController
             $atelierRepository->remove($atelier, true);
         }
 
-        return $this->redirectToRoute('app_atelier_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_atelier_list', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/inscription/{id}', name:'app_atelier_inscription', methods: ['POST', 'GET'])]
+    public function inscription(Atelier $atelier, AtelierRepository $atelierRepository):Response
+    {
+        $atelierModifier = $atelier->addApprenti($this->getUser());
+        $atelierRepository->save($atelierModifier, true);
+
+        return $this->redirectToRoute('app_atelier_show', ['id' => $atelier->getId()]);
+    }
+
+    #[Route('/desinscription/{id}', name: 'app_atelier_desinscription', methods: ['POST', 'GET'])]
+    public function descinscription(Atelier $atelier, AtelierRepository $atelierRepository) {
+        $atelierModifier = $atelier->removeApprenti($this->getUser());
+        $atelierRepository->save($atelierModifier, true);
+
+        return $this->redirectToRoute('app_atelier_show', ['id' => $atelier->getId()]);
     }
 }

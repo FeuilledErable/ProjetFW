@@ -25,7 +25,8 @@ class AtelierFixtures extends Fixture
             ->setNom("MBANGANA ENGONGOLO")
             ->setPrenom("Rebeca")
             ->setUsername('UsernameRebeca20')
-            ->setPassword($this->passwordHasher->hashPassword($user,'secret'));
+            ->setPassword($this->passwordHasher->hashPassword($user,'secret'))
+            ->setRoles(['ROLE_INSTRUCTEUR']);
         $manager->persist($user);
 
 
@@ -39,15 +40,26 @@ class AtelierFixtures extends Fixture
                 ->setNom($faker->lastName)
                 ->setPrenom($faker->firstName)
                 ->setPassword($this->passwordHasher->hashPassword($user,'motdepasse'))
-                ->setUsername("user".$i);
+                ->setUsername("instructeur".$i)
+                ->setRoles(['ROLE_INSTRUCTEUR']);
             $manager->persist($user);
+
+            $apprenti = new User();
+            $apprenti
+                ->setNom($faker->lastName)
+                ->setPrenom($faker->firstName)
+                ->setPassword($this->passwordHasher->hashPassword($apprenti,'motdepasse'))
+                ->setUsername("apprenti".$i)
+                ->setRoles(['ROLE_APPRENTI']);
+            $manager->persist($apprenti);
 
 
             $atelier = new Atelier();
             $atelier
                 ->setNom($faker->word)
                 ->setDescription(join("\n\n* ", $faker->paragraphs))
-                ->setInstructeur($user);
+                ->setInstructeur($user)
+                ->addApprenti($apprenti);
             $manager->persist($atelier);
         }
         $manager->flush();

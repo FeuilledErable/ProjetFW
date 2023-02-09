@@ -40,9 +40,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'instructeur', targetEntity: Atelier::class)]
     private Collection $ateliers;
 
+    #[ORM\ManyToMany(targetEntity: Atelier::class, inversedBy: 'apprentis')]
+    private Collection $ateliers_suivis;
+
     public function __construct()
     {
         $this->ateliers = new ArrayCollection();
+        $this->ateliers_suivis = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -80,9 +84,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
-        // guarantee every user at least has ROLE_INSTRUCTEUR
-        $roles[] = 'ROLE_INSTRUCTEUR';
-
         return array_unique($roles);
     }
 
@@ -167,6 +168,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $atelier->setInstructeur(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Atelier>
+     */
+    public function getAteliersSuivis(): Collection
+    {
+        return $this->ateliers_suivis;
+    }
+
+    public function addAteliersSuivi(Atelier $ateliersSuivi): self
+    {
+        if (!$this->ateliers_suivis->contains($ateliersSuivi)) {
+            $this->ateliers_suivis->add($ateliersSuivi);
+        }
+
+        return $this;
+    }
+
+    public function removeAteliersSuivi(Atelier $ateliersSuivi): self
+    {
+        $this->ateliers_suivis->removeElement($ateliersSuivi);
 
         return $this;
     }

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\AtelierRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: AtelierRepository::class)]
@@ -21,6 +23,14 @@ class Atelier
 
     #[ORM\ManyToOne(inversedBy: 'ateliers')]
     private ?User $instructeur = null;
+
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'ateliers_suivis')]
+    private Collection $apprentis;
+
+    public function __construct()
+    {
+        $this->apprentis = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -59,6 +69,33 @@ class Atelier
     public function setInstructeur(?User $instructeur): self
     {
         $this->instructeur = $instructeur;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getApprentis(): Collection
+    {
+        return $this->apprentis;
+    }
+
+    public function addApprenti(User $apprenti): self
+    {
+        if (!$this->apprentis->contains($apprenti)) {
+            $this->apprentis->add($apprenti);
+            $apprenti->addAteliersSuivi($this);
+        }
+
+        return $this;
+    }
+
+    public function removeApprenti(User $apprenti): self
+    {
+        if ($this->apprentis->removeElement($apprenti)) {
+            $apprenti->removeAteliersSuivi($this);
+        }
 
         return $this;
     }
