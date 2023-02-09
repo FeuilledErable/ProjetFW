@@ -117,3 +117,14 @@ Barre de navigation mise à jour.
 ```bash
 symfony console make:user
 ```
+
+# Question 13
+ ```bash
+ symfony console make:controller profile
+ ```
+
+```
+Ajout de la route permettant d'aller sur le profil de l'utilisateur
+Ajout de la liste d'apprentis sur les ateliers visibleuniquement par les instructeurs
+Ajout de la liste des ateliers inscrit / en charge pour les utilisateurs
+```

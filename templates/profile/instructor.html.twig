@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProfileController!{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+
+        #instructeur-identity {
+            margin-bottom: 5vh;
+        }
+    </style>
+
+{% endblock %}
+
+{% block body %}
+
+<div class="example-wrapper">
+    <div id="instructeur-identity" class="card">
+        <div class="card-body">
+            <h2 class="card-title">{{ instructeur.username }}</h2>
+            <p class="card-subtitle">{{ instructeur.nom }} {{ instructeur.prenom }}</p>
+        </div>
+    </div>
+    <div id="instructeur-atelier">
+        <h2>Nombre d'atelier : Mes Ateliers</h2>
+        <p>{{ ateliers|length }}</p>
+        {% for atelier in ateliers %}
+            {{ include('layers/_list.html.twig') }}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

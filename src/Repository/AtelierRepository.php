@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Atelier;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -37,6 +38,16 @@ class AtelierRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function findByApprenti(User $value): array
+    {
+        return $this->createQueryBuilder('a')
+            ->join('a.apprentis', 'u')
+            ->andWhere('u.id = :id')
+            ->setParameter('id', $value->getId())
+            ->getQuery()
+            ->getResult();
     }
 
 //    /**
