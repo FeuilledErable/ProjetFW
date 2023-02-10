@@ -129,9 +129,15 @@ class AtelierController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $note->setAtelier($atelier);
-            $note->setApprenti($this->getUser());
+            $notes = $noteRepository->findAll();
+            foreach ($notes as $n) {
+                if (($n->getAtelier() == $atelier) and ($n->getApprenti() == $this->getUser())) {
+                    return $this->redirectToRoute('app_atelier_show', ['id' => $atelier->getId()]);
+                }
+            }
 
+            $atelier->addNote($note);
+            $this->getUser()->addNote($note);
             $noteRepository->save($note, true);
 
             return $this->redirectToRoute('app_atelier_show', ['id' => $atelier->getId()]);
