@@ -27,9 +27,13 @@ class Atelier
     #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'ateliers_suivis')]
     private Collection $apprentis;
 
+    #[ORM\OneToMany(mappedBy: 'atelier', targetEntity: Note::class)]
+    private Collection $notes;
+
     public function __construct()
     {
         $this->apprentis = new ArrayCollection();
+        $this->notes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -95,6 +99,36 @@ class Atelier
     {
         if ($this->apprentis->removeElement($apprenti)) {
             $apprenti->removeAteliersSuivi($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Note>
+     */
+    public function getNotes(): Collection
+    {
+        return $this->notes;
+    }
+
+    public function addNote(Note $note): self
+    {
+        if (!$this->notes->contains($note)) {
+            $this->notes->add($note);
+            $note->setAtelier($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNote(Note $note): self
+    {
+        if ($this->notes->removeElement($note)) {
+            // set the owning side to null (unless already changed)
+            if ($note->getAtelier() === $this) {
+                $note->setAtelier(null);
+            }
         }
 
         return $this;

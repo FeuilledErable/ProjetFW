@@ -138,3 +138,19 @@ Signalement des cours suivis ou des cours créés sur la liste des ateliers.
 ```bash
 symfony console make:crud User
 ```
+
+# Question 16
+
+## Separation ?
+
+```
+on a rajouté au fur et à mesure des contraintes...
+```
+
+# Question 17
+
+## Notation
+
+```bash
+symfony console make:entity Note
+```

@@ -43,10 +43,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Atelier::class, inversedBy: 'apprentis')]
     private Collection $ateliers_suivis;
 
+    #[ORM\OneToMany(mappedBy: 'apprenti', targetEntity: Note::class)]
+    private Collection $notes;
+
     public function __construct()
     {
         $this->ateliers = new ArrayCollection();
         $this->ateliers_suivis = new ArrayCollection();
+        $this->notes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -192,6 +196,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeAteliersSuivi(Atelier $ateliersSuivi): self
     {
         $this->ateliers_suivis->removeElement($ateliersSuivi);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Note>
+     */
+    public function getNotes(): Collection
+    {
+        return $this->notes;
+    }
+
+    public function addNote(Note $note): self
+    {
+        if (!$this->notes->contains($note)) {
+            $this->notes->add($note);
+            $note->setApprenti($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNote(Note $note): self
+    {
+        if ($this->notes->removeElement($note)) {
+            // set the owning side to null (unless already changed)
+            if ($note->getApprenti() === $this) {
+                $note->setApprenti(null);
+            }
+        }
 
         return $this;
     }

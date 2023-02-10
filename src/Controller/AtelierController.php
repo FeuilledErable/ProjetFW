@@ -3,9 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Atelier;
+use App\Entity\Note;
 use App\Form\AtelierType;
+use App\Form\NoteType;
 use App\MesServices\MarkdownAtelier;
 use App\Repository\AtelierRepository;
+use App\Repository\NoteRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -52,8 +55,23 @@ class AtelierController extends AbstractController
     #[Route('/{id}', name: 'app_atelier_show', methods: ['GET'])]
     public function show(Atelier $atelier, MarkdownAtelier $markdownAtelier): Response
     {
+
+        $notes = $atelier->getNotes();
+        if (count($notes) !== 0) {
+            $som = 0;
+            foreach ($notes as $note) {
+                $som = $som + $note->getValeur();
+            }
+            $moyenne = $som / count($notes) ;
+        }
+        else {
+            $moyenne = -1;
+        }
+
+
         return $this->render('atelier/show.html.twig', [
             'atelier' => $markdownAtelier->parse($atelier),
+            'moyenne' => $moyenne,
         ]);
     }
 
@@ -101,4 +119,28 @@ class AtelierController extends AbstractController
 
         return $this->redirectToRoute('app_atelier_show', ['id' => $atelier->getId()]);
     }
+
+    #[Route('/noter/{id}', name: 'app_note_noter', methods: ['GET', 'POST'])]
+    public function noter(Atelier $atelier, Request $request, NoteRepository $noteRepository): Response
+    {
+        $note = new Note();
+        $form = $this->createForm(NoteType::class, $note);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $note->setAtelier($atelier);
+            $note->setApprenti($this->getUser());
+
+            $noteRepository->save($note, true);
+
+            return $this->redirectToRoute('app_atelier_show', ['id' => $atelier->getId()]);
+        }
+
+        return $this->renderForm('layers/noter_atelier.html.twig', [
+            'note' => $note,
+            'form' => $form,
+        ]);
+    }
+
 }
