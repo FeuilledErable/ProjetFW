@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Atelier index{% endblock %}
+
+{% block body %}
+    <div class="w-75 p-3 mx-auto">
+        <h1 class="text-uppercase nav justify-content-center">Bienvenu.e ! </h1>
+        {% if app.user %}
+            <h2 class="text-uppercase nav justify-content-center"> {{ app.user.nom }} {{ app.user.prenom }}</h2>
+            <br>
+        {% endif %}
+
+        <fieldset class="border border-secondary">
+            <p>Bienvenu.e sur notre site ! </p>
+            <p>Ici vous pouvez créer un nouvel atelier, le modifier, et voir la liste au complet de nos ateliers proposés !</p>
+        </fieldset>
+
+        <br>
+        <br>
+        <h5><u> Programmeurs de talent qui méritent une magnifique note ✨ : </u></h5>
+        <ul class="border border-secondary">
+            <li>
+                KOUKOUGNON Lehion Alexia
+            </li>
+            <li>
+                MBANGANA ENGONGOLO Rebeca
+            </li>
+            <li>
+                PROUST Olivia
+            </li>
+            <li>
+                TERTEREAU Rhayan
+            </li>
+        </ul>
+    </div>
+{% endblock %}

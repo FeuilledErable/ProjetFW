@@ -1,0 +1,18 @@
+<div class="card w-75 p-3 mx-auto border border-secondary bg-light">
+    <div class="card-body bg-light" >
+        <h5 class="card-title">{{ atelier.nom }}</h5>
+
+        <span class="d-inline-block text-truncate" style="max-width: 150px;">
+                    {{ atelier.description | raw }}
+        </span>
+        <br>
+        {% if is_granted('ROLE_APPRENTI') and (app.user in atelier.apprentis) %}
+            <p class="text-info"> Vous êtes inscrit.e à ce module.</p>
+        {% endif %}
+        {% if is_granted('ROLE_INSTRUCTEUR') and (atelier.instructeur == app.user) %}
+            <p class="text-info"> Vous êtes l'auteur de cet atelier. </p>
+        {% endif %}
+        <button onclick="location.href='{{ path('app_atelier_show', {'id': atelier.id}) }}'"
+                title="Show" class="btn btn-success">Voir</button>
+    </div>
+</div>

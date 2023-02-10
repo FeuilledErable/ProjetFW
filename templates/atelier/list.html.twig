@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des ateliers{% endblock %}
+
+{% block body %}
+    <h1 class="text-uppercase nav justify-content-center"> <u> Liste des ateliers : </u></h1>
+    <br>
+    {% for atelier in ateliers %}
+        {{ include('layers/_list.html.twig') }}
+    {% endfor %}
+
+
+    <!-- \('-')/
+    <a href="{{ path('app_atelier_new') }}">Create new</a>
+    -->
+{% endblock %}

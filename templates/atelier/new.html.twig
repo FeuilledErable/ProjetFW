@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvel Atelier{% endblock %}
+
+{% block body %}
+    <h1 class="text-uppercase nav justify-content-center"><u>Créer un nouvel Atelier</u></h1>
+    <br>
+
+
+    <div class="card w-75 p-3 mx-auto border border-secondary bg-light">
+        <div class="card-body bg-light" >
+            {{ include('layers/_form.html.twig') }}
+            <a href="{{ path('app_atelier_list') }}">Retourner à la liste</a>
+        </div>
+    </div>
+{% endblock %}

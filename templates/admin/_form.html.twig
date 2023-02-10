@@ -1,0 +1,23 @@
+{{ form_start(form) }}
+
+    {{ form_row(form.nom) }}
+
+    {{ form_row(form.prenom) }}
+
+    {{ form_row(form.username, {
+        label:'Pseudo'
+    }) }}
+
+    {{ form_row(form.plainPassword, {
+        label: 'Mot de passe'
+    }) }}
+
+    {{ form_row(form.roles, {
+        label: 'Rôles'
+    }) }}
+
+    <br>
+
+    <button class="btn btn-success">{{ button_label|default('Ajouter l\'instructeur') }}</button>
+{{ form_end(form) }}
+

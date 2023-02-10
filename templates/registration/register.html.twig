@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+    <h1 class="text-uppercase nav justify-content-center">Inscription</h1>
+
+    <div class="card w-75 p-3 mx-auto border border-secondary bg-light">
+        <div class="card-body bg-light" >
+            {{ form_start(registrationForm) }}
+            {{ form_row(registrationForm.nom) }}
+            {{ form_row(registrationForm.prenom) }}
+            {{ form_row(registrationForm.username, {
+                label:'Pseudo'
+            })
+            }}
+            {{ form_row(registrationForm.plainPassword, {
+                label: 'Mot de passe'
+            }) }}
+
+            {{  form_row(registrationForm.roles, {
+                label: 'Rôles'
+            }) }}
+            {{ form_row(registrationForm.agreeTerms, {
+                label: 'Accepter les termes de confidentialité'
+            }) }}
+
+            <button type="submit" class="btn btn-success">S'inscrire</button>
+            {{ form_end(registrationForm) }}
+        </div>
+    </div>
+{% endblock %}

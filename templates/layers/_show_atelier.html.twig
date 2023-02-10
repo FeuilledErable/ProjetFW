@@ -1,0 +1,58 @@
+<div class="card w-75 p-3 mx-auto border border-secondary bg-light">
+    <div class="card-body bg-light" >
+        <h5 class="card-title">{{ atelier.nom }}</h5>
+        <p class="card-text">
+            {{ atelier.description | raw }}
+        </p>
+
+        <h4 class="card-title">Instructeur : {{ atelier.instructeur.nom }} {{atelier.instructeur.prenom }}</h4>
+
+        <div class="card-footer bg-transparent border-success">
+            {% if is_granted('ROLE_INSTRUCTEUR') %}
+                <h6 class="card-title" style="margin-top: 2vh;">Les Apprentis :</h6>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Prénom</th>
+                            <th scope="col">Nom</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% if atelier.apprentis is empty %}
+                        <tr>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                    {% endif %}
+                    {% for user in atelier.apprentis %}
+                        <tr>
+                            <td>{{ user.prenom }}</td>
+                            <td>{{ user.nom }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <div class="container>">
+                    <div class="row" style="margin-top: 5vh;">
+                        <button onclick="location.href='{{ path('app_atelier_edit', {'id': atelier.id}) }}'"
+                                title="Edit" class="col-2 btn btn-success">Modifier</button>
+                        <div class="col-md-auto">
+                        {{ include('layers/_delete_form.html.twig') }}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            {% if is_granted('ROLE_APPRENTI')  %}
+                {{ include('layers/inscription_atelier.html.twig') }}
+                {{ include('layers/desinscription_atelier.html.twig') }}
+            {% endif %}
+
+        </div>
+    </div>
+    <a href="{{ path('app_atelier_list') }}">Retourner à la liste</a>
+</div>
+
+
+
+
