@@ -153,4 +153,5 @@ on a rajouté au fur et à mesure des contraintes...
 
 ```bash
 symfony console make:entity Note
+symfony console make:form
 ```
