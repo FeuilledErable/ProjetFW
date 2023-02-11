@@ -5,7 +5,7 @@
             {{ atelier.description | raw }}
         </p>
 
-        <h4 class="card-title">Instructeur : {{ atelier.instructeur.nom }} {{atelier.instructeur.prenom }}</h4>
+        <h4 class="card-title">Instructeur : {{ atelier.instructeur.nom|upper }} {{atelier.instructeur.prenom }}</h4>
 
         <div class="card-footer bg-transparent border-success">
             {% if is_granted('ROLE_INSTRUCTEUR') %}

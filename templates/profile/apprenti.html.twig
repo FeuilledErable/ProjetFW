@@ -10,6 +10,7 @@
 
         #apprenti-identity {
             margin-bottom: 5vh;
+            background-color: #758f7e;
         }
     </style>
 
@@ -20,13 +21,12 @@
     <div class="example-wrapper">
         <div id="apprenti-identity" class="card">
             <div class="card-body">
-                <h2 class="card-title">Apprenti</h2>
-                <p class="card-subtitle">{{ apprenti.nom }} {{ apprenti.prenom }}</p>
+                <h2 class="card-title nav justify-content-center">Apprenti : {{ apprenti.nom|upper }} {{ apprenti.prenom }}</h2>
             </div>
         </div>
         <div id="apprenti-atelier">
-            <h2>Mes Ateliers</h2>
-            <p>Nombre d'atelier : {{ ateliers|length }}</p>
+            <h2 class="text-uppercase nav justify-content-center"> <u> Mes Ateliers</u></h2>
+            <br>
             {% for atelier in ateliers %}
                 {{ include('layers/_list.html.twig') }}
             {% endfor %}
