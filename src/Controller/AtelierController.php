@@ -65,7 +65,7 @@ class AtelierController extends AbstractController
             $moyenne = $som / count($notes) ;
         }
         else {
-            $moyenne = -1;
+            $moyenne = "Aucune note donnée";
         }
 
 
@@ -113,7 +113,8 @@ class AtelierController extends AbstractController
     }
 
     #[Route('/desinscription/{id}', name: 'app_atelier_desinscription', methods: ['POST', 'GET'])]
-    public function descinscription(Atelier $atelier, AtelierRepository $atelierRepository) {
+    public function desinscription(Atelier $atelier, AtelierRepository $atelierRepository) : Response
+    {
         $atelierModifier = $atelier->removeApprenti($this->getUser());
         $atelierRepository->save($atelierModifier, true);
 
@@ -132,6 +133,8 @@ class AtelierController extends AbstractController
             $notes = $noteRepository->findAll();
             foreach ($notes as $n) {
                 if (($n->getAtelier() == $atelier) and ($n->getApprenti() == $this->getUser())) {
+                    $n->setValeur($note->getValeur());
+                    $noteRepository->save($n, true);
                     return $this->redirectToRoute('app_atelier_show', ['id' => $atelier->getId()]);
                 }
             }

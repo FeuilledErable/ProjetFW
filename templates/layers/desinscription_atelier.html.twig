@@ -1,6 +1,4 @@
 {% if (app.user in atelier.apprentis)%}
-     <form method="post" action="{{ path('app_atelier_inscription', {'id': atelier.id}) }}"
-           onsubmit="return confirm('Êtes vous sûr.e de vous désinscrire de l\'atelier ?');">
-          <button class="btn btn-warning">Se désinscrire</button>
-     </form>
+     <button onclick="location.href='{{ path('app_atelier_desinscription', {'id': atelier.id}) }}'"
+             title="Desinscription" class="col-2 btn btn-warning">Se désinscrire</button>
 {% endif %}
